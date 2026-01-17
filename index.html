@@ -2,45 +2,43 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>♥ Free Friends Chat ♥</title>
+  <title>Free Friends Chat</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="center-container">
 
-    <h1>♥ Free Friends Chat ♥</h1>
+<div id="lobby" class="center">
+  <h1>♥ Free Friends Chat ♥</h1>
 
-    <!-- Create Room Section -->
-    <div id="createRoomSection" class="card">
-      <h3>Create Room</h3>
-      <input type="text" id="createRoomName" placeholder="Room Name">
-      <input type="text" id="createRoomPassword" placeholder="Room Password">
-      <input type="text" id="createUserName" placeholder="Your Name">
-      <button id="createBtn">Create Room</button>
-    </div>
+  <input id="nameInput" placeholder="Your name">
+  <input id="roomNameInput" placeholder="Room name">
+  <input id="roomPassInput" placeholder="Room password">
 
-    <!-- Active Rooms Section -->
-    <div id="activeRoomsSection" class="card">
-      <h3>Active Rooms</h3>
-      <ul id="roomsList"></ul>
-    </div>
+  <button id="createBtn">Create Room</button>
 
-    <!-- Chat Section (only shows after join) -->
-    <div id="chatSection" class="hidden card">
-      <h3 id="roomTitle"></h3>
-      <div id="chat"></div>
-      <textarea id="message" placeholder="Type a message..."></textarea>
-      <button id="sendBtn">Send</button>
-      <button id="micBtn">🎤</button>
-    </div>
+  <h3>Active Rooms</h3>
+  <ul id="roomList"></ul>
+</div>
 
-    <!-- Notification -->
-    <div id="notification" class="hidden"></div>
-
+<div id="room" class="hidden">
+  <div id="topBar">
+    <button id="leaveBtn">Leave</button>
   </div>
 
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-  <script src="app.js"></script>
+  <div id="chat"></div>
+
+  <div class="controls">
+    <input id="msgInput" placeholder="Message...">
+    <button id="sendBtn">Send</button>
+    <button id="micBtn">🎤</button>
+  </div>
+</div>
+
+<div id="toast" class="hidden"></div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="app.js"></script>
+
 </body>
 </html>
