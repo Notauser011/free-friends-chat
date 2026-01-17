@@ -1,5 +1,4 @@
-/* Animate gradient background */
-@keyframes gradientShift {
+@keyframes bg {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
@@ -7,81 +6,91 @@
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #0a0f2c, #6a4bc4, #8f7cff);
+  font-family: Arial;
+  background: linear-gradient(135deg,#0b102a,#5f4bd8,#000);
   background-size: 400% 400%;
-  animation: gradientShift 15s ease infinite;
+  animation: bg 20s infinite;
   color: white;
   height: 100vh;
+}
+
+.center {
+  height: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.center-container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-items: center;
-  width: 400px;
-}
-
-.card {
-  background: rgba(0,0,0,0.5);
-  padding: 20px;
-  border-radius: 15px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
   gap: 10px;
 }
 
-.hidden { display: none; }
-
-input, textarea {
+input {
   padding: 10px;
   border-radius: 10px;
   border: none;
-  transition: transform 0.1s, background 0.2s;
-}
-
-input:hover, textarea:hover {
-  transform: scale(1.02);
-  background: rgba(255,255,255,0.1);
+  width: 250px;
 }
 
 button {
   padding: 10px;
   border-radius: 10px;
   border: none;
-  background: #6a4bc4;
+  background: #6b5cff;
   color: white;
   cursor: pointer;
-  transition: transform 0.1s, background 0.2s;
+  transition: transform 0.15s, background 0.15s;
 }
 
 button:hover {
-  transform: scale(1.05);
-  background: #8f7cff;
+  transform: scale(1.06);
+  background: #8579ff;
+}
+
+.hidden { display: none; }
+
+#room {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#topBar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+#leaveBtn {
+  background: #ff3b3b;
+}
+
+#leaveBtn:hover {
+  background: #ff6060;
 }
 
 #chat {
-  height: 300px;
+  flex: 1;
   overflow-y: auto;
-  background: rgba(255,255,255,0.05);
   padding: 10px;
-  border-radius: 10px;
-  margin-bottom: 5px;
 }
 
-#notification {
+.controls {
+  display: flex;
+  gap: 5px;
+  padding: 10px;
+}
+
+#micBtn.on {
+  background: #00ffcc;
+  color: black;
+}
+
+#toast {
   position: fixed;
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.85);
   padding: 15px 25px;
   border-radius: 15px;
   font-weight: bold;
-  transition: opacity 0.5s;
 }
