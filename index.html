@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>♥ Free Friends Chat ♥</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="center-container">
+
+    <h1>♥ Free Friends Chat ♥</h1>
+
+    <!-- Create Room Section -->
+    <div id="createRoomSection" class="card">
+      <h3>Create Room</h3>
+      <input type="text" id="createRoomName" placeholder="Room Name">
+      <input type="text" id="createRoomPassword" placeholder="Room Password">
+      <input type="text" id="createUserName" placeholder="Your Name">
+      <button id="createBtn">Create Room</button>
+    </div>
+
+    <!-- Active Rooms Section -->
+    <div id="activeRoomsSection" class="card">
+      <h3>Active Rooms</h3>
+      <ul id="roomsList"></ul>
+    </div>
+
+    <!-- Chat Section (only shows after join) -->
+    <div id="chatSection" class="hidden card">
+      <h3 id="roomTitle"></h3>
+      <div id="chat"></div>
+      <textarea id="message" placeholder="Type a message..."></textarea>
+      <button id="sendBtn">Send</button>
+      <button id="micBtn">🎤</button>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="hidden"></div>
+
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
