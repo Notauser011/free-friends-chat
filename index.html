@@ -1,44 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Free Friends Chat</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<div id="lobby" class="center">
-  <h1>♥ Free Friends Chat ♥</h1>
+<div id="container">
+  <h1>Free Friends Chat</h1>
 
-  <input id="nameInput" placeholder="Your name">
-  <input id="roomNameInput" placeholder="Room name">
-  <input id="roomPassInput" placeholder="Room password">
+  <div id="joinBox">
+    <input id="username" placeholder="Your name" />
+    <input id="roomName" placeholder="Room name" />
+    <input id="roomPass" placeholder="Room password" type="password" />
 
-  <button id="createBtn">Create Room</button>
+    <button id="createBtn">Create Room</button>
+    <button id="joinBtn">Join Room</button>
+  </div>
 
-  <h3>Active Rooms</h3>
-  <ul id="roomList"></ul>
-</div>
+  <div id="roomUI" hidden>
+    <div id="joinedText"></div>
 
-<div id="room" class="hidden">
-  <div id="topBar">
+    <button id="micBtn">Turn On Mic</button>
+
+    <div id="chat">
+      <div id="messages"></div>
+      <input id="chatInput" placeholder="Type message..." />
+    </div>
+
     <button id="leaveBtn">Leave</button>
   </div>
-
-  <div id="chat"></div>
-
-  <div class="controls">
-    <input id="msgInput" placeholder="Message...">
-    <button id="sendBtn">Send</button>
-    <button id="micBtn">🎤</button>
-  </div>
 </div>
 
-<div id="toast" class="hidden"></div>
+<audio id="remoteAudio" autoplay></audio>
 
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-<script src="app.js"></script>
-
+<script type="module" src="app.js"></script>
 </body>
 </html>
