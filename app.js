@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {
-  getDatabase, ref, set, push, onValue, remove, onDisconnect
+  getDatabase, ref, set, get, onValue, push, remove, onDisconnect
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 const firebaseConfig = {
@@ -20,27 +20,47 @@ const joinBox = document.getElementById("joinBox");
 const roomUI = document.getElementById("roomUI");
 const joinedText = document.getElementById("joinedText");
 
-document.getElementById("createBtn").onclick = () => join(true);
-document.getElementById("joinBtn").onclick = () => join(false);
+document.getElementById("createBtn").onclick = createRoom;
+document.getElementById("joinBtn").onclick = joinRoom;
 document.getElementById("micBtn").onclick = toggleMic;
 document.getElementById("leaveBtn").onclick = leaveRoom;
 
-function join(create) {
+async function createRoom() {
   username = usernameInput.value.trim();
   room = roomName.value.trim();
-  const pass = roomPass.value;
+  const pass = roomPass.value.trim();
 
   if (!username || !room || !pass) return alert("Fill everything");
 
-  userId = crypto.randomUUID();
+  const roomRef = ref(db, `rooms/${room}`);
+  const snap = await get(roomRef);
+
+  if (snap.exists()) return alert("Room already exists");
+
+  await set(roomRef, { password: pass });
+  enterRoom();
+}
+
+async function joinRoom() {
+  username = usernameInput.value.trim();
+  room = roomName.value.trim();
+  const pass = roomPass.value.trim();
+
+  if (!username || !room || !pass) return alert("Fill everything");
 
   const roomRef = ref(db, `rooms/${room}`);
+  const snap = await get(roomRef);
+
+  if (!snap.exists()) return alert("Room not found");
+  if (snap.val().password !== pass) return alert("Wrong password");
+
+  enterRoom();
+}
+
+function enterRoom() {
+  userId = crypto.randomUUID();
+
   const userRef = ref(db, `rooms/${room}/users/${userId}`);
-
-  if (create) {
-    set(roomRef, { password: pass });
-  }
-
   set(userRef, { name: username });
   onDisconnect(userRef).remove();
 
@@ -107,15 +127,9 @@ function watchSignals() {
       const data = child.val();
       const from = child.key;
 
-      if (data.offer) {
-        answer(from, data.offer);
-      }
-      if (data.answer) {
-        pcMap[from]?.setRemoteDescription(data.answer);
-      }
-      if (data.candidate) {
-        pcMap[from]?.addIceCandidate(data.candidate);
-      }
+      if (data.offer) answer(from, data.offer);
+      if (data.answer) pcMap[from]?.setRemoteDescription(data.answer);
+      if (data.candidate) pcMap[from]?.addIceCandidate(data.candidate);
     });
   });
 }
